@@ -1,10 +1,10 @@
 # WME BDP Check (JS55CT Fork)
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
 ## Overview
 
-This is a fork of the [WME BDP Check](https://github.com/WazeDev/WME-BDP-Check), a user script for the Waze Map Editor (WME) designed to check for possible "Backbone Detour Prevention" (BDP) routes between two selected segments. This fork introduces several modifications and improvements to enhance script functionality and usability.
+This is a fork of the [WME BDP Check from the WazeDev team](https://github.com/WazeDev/WME-BDP-Check), a user script for the Waze Map Editor (WME) designed to check for possible "Backbone Detour Prevention" (BDP) routes between two selected segments. This fork introduces several modifications and improvements to enhance script functionality and usability.
 
 ## Major Changes
 
@@ -17,18 +17,24 @@ This is a fork of the [WME BDP Check](https://github.com/WazeDev/WME-BDP-Check),
 
 ## Installation
 
-To install the script, follow these steps:
+To install this user script, you need to have a userscript manager installed in your browser (such as Tampermonkey or Greasemonkey).
 
-1. **Install a User Script Manager**:
-   - For [Tampermonkey](https://www.tampermonkey.net/):
-     - Chrome: [Install from Chrome Web Store](https://chrome.google.com/webstore/detail/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-     - Firefox: [Install from Add-ons Market](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/)
-   - For [Greasemonkey](https://www.greasespot.net/):
-     - Firefox: [Install from Add-ons Market](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/)
+### Tampermonkey (Recommended)
 
-2. **Install the Script**:
-   - Visit the following URL and click the install button:
-     - [WME BDP Check (JS55CT Fork)](#) *(Replace with the actual `@downloadURL` that you will set)*
+1. **Install Tampermonkey**:
+   - [Tampermonkey for Chrome](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
+   - [Tampermonkey for Firefox](https://addons.mozilla.org/firefox/addon/tampermonkey/)
+   - [Other browsers](https://www.tampermonkey.net/)
+
+2. **Add the Script via URL**:
+   - **Open the Tampermonkey dashboard** by clicking on the Tampermonkey icon in your browser toolbar and selecting "Dashboard".
+   - In the dashboard, click on the tab that says "Utilities".
+   - In the "Import from URL" section, paste the following URL:
+     ```
+     https://raw.githubusercontent.com/JS55CT/WME-BDP-Check-JS55CT-Fork/refs/heads/main/WME-BDP-Check.js)
+     ```
+   - Click on the "Import" button.
+   - You will be directed to a page that shows the script. Click the "Install" button.
 
 ## Usage
 
@@ -41,9 +47,14 @@ To install the script, follow these steps:
 ## How It Works
 
 ### Conditions for BDP Checks
-- **Road Types**: Only segments of specific road types (e.g., Minor Highway, Major Highway) are checked.
+- **Road Types**: Only segments of specific road types are checked. Road types need to be within Minor Highway, Major Highway, and Freeway categories.
 - **Street Name Continuity**: Segments must share a common street name for BDP applicability.
-- **Road Type Groups**: Segments must belong to the same road type group.
+- **Road Type Groups (RTG)**: Segments must belong to the same road type group (Minor Highway or Major Highway and Freeways). The script distinguishes:
+- **Selection Continuity**: When selecting more than two segments, the selected segments must form a continuous route.
+- **One-Way Segments**: Only one-way segments where the turn is allowed based on the segment direction and node directionality will be considered in the checks.
+- **Segment Types**: Selection must not include segments of unrouteable types such as Railroads, Runways, Private Roads, Off-Road, etc.
+- **Length Constraints**: The total length of alternate routes checked must be within maximum allowed limits:
+- **Detour Length**: Detours must contain at least two segments with a total length less than 500 meters for Minor Highways and less than 5000 meters for Major Highways and Freeways.
 
 ### Alerts and Warnings
 - Informative alerts on continuity checks, direct route finds, and BDP applicability.
