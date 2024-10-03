@@ -31,7 +31,7 @@ To install this user script, you need to have a userscript manager installed in 
    - In the dashboard, click on the tab that says "Utilities".
    - In the "Import from URL" section, paste the following URL:
      ```
-     https://raw.githubusercontent.com/JS55CT/WME-BDP-Check-JS55CT-Fork/refs/heads/main/WME-BDP-Check.js)
+     https://raw.githubusercontent.com/JS55CT/WME-BDP-Check-JS55CT-Fork/refs/heads/main/WME-BDP-Check.js
      ```
    - Click on the "Import" button.
    - You will be directed to a page that shows the script. Click the "Install" button.
