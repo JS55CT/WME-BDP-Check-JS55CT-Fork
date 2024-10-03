@@ -1,16 +1,17 @@
 // ==UserScript==
-// @name        WME BDP Check (JS55CT Fork)
-// @namespace   https://github.com/JS55CT
-// @description Check for possible BDP routes between two selected segments (Modified from original).
-// @downloadURL  
-// @updateURL    
-// @author      JS55CT
-// @match       http*://*.waze.com/*editor*
-// @exclude     http*://*.waze.com/user/editor*
-// @require     https://greasyfork.org/scripts/24851-wazewrap/code/WazeWrap.js
-// @grant       GM_xmlhttpRequest
-// @license     GPLv3
-// @source      https://github.com/JS%%CT/wme-bdp-check
+// @name         WME BDP Check (JS55CT Fork)
+// @namespace    https://github.com/JS55CT
+// @version      2024.10.03.01
+// @description  Check for possible BDP routes between two selected segments (Modified from original).
+// @downloadURL  https://raw.githubusercontent.com/JS55CT/WME-BDP-Check-JS55CT-Fork/refs/heads/main/WME-BDP-Check.js
+// @updateURL    https://raw.githubusercontent.com/JS55CT/WME-BDP-Check-JS55CT-Fork/refs/heads/main/WME-BDP-Check.js
+// @author       JS55CT
+// @match        http*://*.waze.com/*editor*
+// @exclude      http*://*.waze.com/user/editor*
+// @require      https://greasyfork.org/scripts/24851-wazewrap/code/WazeWrap.js
+// @grant        GM_xmlhttpRequest
+// @license      GPLv3
+// @source       https://github.com/JS%%CT/wme-bdp-check
 // @original-author dBsooner
 // @original-source  https://github.com/WazeDev/WME-BDP-Check
 // ==/UserScript==
