@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WME BDP Check (JS55CT Fork)
 // @namespace    https://github.com/JS55CT
-// @version      2024.10.03.02
+// @version      2024.10.03.03
 // @description  Check for possible BDP routes between two selected segments (Modified from original).
 // @downloadURL  https://raw.githubusercontent.com/JS55CT/WME-BDP-Check-JS55CT-Fork/main/WME-BDP-Check.js
 // @updateURL    https://raw.githubusercontent.com/JS55CT/WME-BDP-Check-JS55CT-Fork/main/WME-BDP-Check.js
@@ -19,6 +19,10 @@
 /* global GM_info, GM_xmlhttpRequest, W, WazeWrap */
 
 /*
+ * Production Version Name : @name        WME BDP Check (JS55CT Fork)
+ * Beta Version Name: @name        WME BDP Check (JS55CT Fork) beta
+ * Development (Alpha) Version: @name        WME BDP Check (JS55CT Fork) (DEV)
+
  * This script is a modified version of "WME BDP Check" originally created by dBsooner.
  * The original version can be found at: https://github.com/WazeDev/WME-BDP-Check
  * 
@@ -33,27 +37,27 @@
 
     // eslint-disable-next-line no-nested-ternary
     const _SCRIPT_SHORT_NAME = `WME BDPC${(/beta/.test(GM_info.script.name) ? ' β' : /\(DEV\)/i.test(GM_info.script.name) ? ' Ω' : '')}`,
-          _SCRIPT_LONG_NAME = GM_info.script.name,
-          _IS_ALPHA_VERSION = /[Ω]/.test(_SCRIPT_SHORT_NAME),
-          _IS_BETA_VERSION = /[β]/.test(_SCRIPT_SHORT_NAME),
-          _SCRIPT_AUTHOR = GM_info.script.author,
-          _PROD_DL_URL = 'https://greasyfork.org/scripts/393407-wme-bdp-check/code/WME%20BDP%20Check.user.js',
-          _FORUM_URL = 'https://www.waze.com/forum/viewtopic.php?f=819&t=294789',
-          _SETTINGS_STORE_NAME = 'WMEBDPC',
-          _BETA_DL_URL = 'YUhSMGNITTZMeTluY21WaGMzbG1iM0pyTG05eVp5OXpZM0pwY0hSekx6TTVNVEkzTVMxM2JXVXRZbVJ3TFdOb1pXTnJMV0psZEdFdlkyOWtaUzlYVFVVbE1qQkNSRkFsTWpCRGFHVmpheVV5TUNoaVpYUmhLUzUxYzJWeUxtcHo=',
-          _ALERT_UPDATE = true,
-          _SCRIPT_VERSION = GM_info.script.version,
-          _SCRIPT_VERSION_CHANGES = ['CHANGE: Compatibility with latest WME release.'],
-          _DEBUG = /[βΩ]/.test(_SCRIPT_SHORT_NAME),
-          _LOAD_BEGIN_TIME = performance.now(),
-          sleep = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds)),
-          dec = (s = '') => atob(atob(s)),
-          _elems = {
-              div: document.createElement('div'),
-              'wz-button': document.createElement('wz-button'),
-              'wz-card': document.createElement('wz-card')
-          },
-          _timeouts = { onWmeReady: undefined, saveSettingsToStorage: undefined };
+        _SCRIPT_LONG_NAME = GM_info.script.name,
+        _IS_ALPHA_VERSION = /[Ω]/.test(_SCRIPT_SHORT_NAME),
+        _IS_BETA_VERSION = /[β]/.test(_SCRIPT_SHORT_NAME),
+        _SCRIPT_AUTHOR = GM_info.script.author,
+        _PROD_DL_URL = 'https://raw.githubusercontent.com/JS55CT/WME-BDP-Check-JS55CT-Fork/main/WME-BDP-Check.js',
+        _FORUM_URL = 'https://github.com/JS55CT/WME-BDP-Check-JS55CT-Fork/issues',
+        _SETTINGS_STORE_NAME = 'WMEBDPC',
+        _BETA_DL_URL = 'https://raw.githubusercontent.com/JS55CT/WME-BDP-Check-JS55CT-Fork/main/WME-BDP-Check.js',  // Using the same URL for beta
+        _ALERT_UPDATE = true,
+        _SCRIPT_VERSION = GM_info.script.version,
+        _SCRIPT_VERSION_CHANGES = ['CHANGE: Update the URLs, FIX: Corrected midpoint calculation. '],
+        _DEBUG = /[βΩ]/.test(_SCRIPT_SHORT_NAME),
+        _LOAD_BEGIN_TIME = performance.now(),
+        sleep = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds)),
+        dec = (s = '') => atob(atob(s)),
+        _elems = {
+            div: document.createElement('div'),
+            'wz-button': document.createElement('wz-button'),
+            'wz-card': document.createElement('wz-card')
+        },
+        _timeouts = { onWmeReady: undefined, saveSettingsToStorage: undefined };
     let _settings = {},
         _pathEndSegId,
         _restoreZoomLevel,
